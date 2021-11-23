@@ -64,11 +64,16 @@ class ViewController: UIViewController {
         removeFormulaView()
     }
     
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
+    func setupButtons() {
         calculatorButtons.forEach { button in
-            button.layer.cornerRadius = button.layer.frame.size.width / 2
+            button.layoutIfNeeded()
+            button.layer.cornerRadius = button.bounds.width / 2
         }
+    }
+
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        setupButtons()
     }
 }
 
