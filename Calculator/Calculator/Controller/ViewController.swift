@@ -168,6 +168,7 @@ extension ViewController {
                 return
             case .queueNotFound:
                 os_log(.error, log: .error, "%@", error.errorDescription ?? error.localizedDescription)
+                debugPrint(error.errorDescription ?? error.localizedDescription)
                 removeFormulaView()
                 return
             default:
