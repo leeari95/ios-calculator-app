@@ -113,34 +113,7 @@ extension ViewController {
     }
     
     @IBAction func equalButtonTapped(_ sender: UIButton) {
-        guard isNotCalculated else {
-            return
-        }
-        addCurrentFormulaStack()
-        var formula = ExpressionParser.parse(from: calculatorStackView.toString)
-        do {
-            let calcuatorResult = try formula.result()
-            currentOperand = setUpNumberFormat(for: calcuatorResult)
-        } catch let error as CalculatorError {
-            switch error {
-            case .isNaN:
-                currentOperand = error.failureReason ?? "NaN"
-                hasCalculated = true
-                return
-            case .queueNotFound:
-                os_log(.error, log: .error, "%@", error.errorDescription ?? error.localizedDescription)
-                debugPrint(error.errorDescription ?? error.localizedDescription)
-                removeFormulaView()
-                return
-            default:
-                os_log(.error, log: .error, "%@", error.errorDescription ?? error.localizedDescription)
-                return
-            }
-        } catch let error {
-            os_log(.error, log: .error, "%@", error.localizedDescription)
-        }
-        currentOperator = ""
-        hasCalculated = true
+        calculator.equalButtonTap()
     }
 }
 

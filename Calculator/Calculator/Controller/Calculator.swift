@@ -115,6 +115,35 @@ extension Calculator {
         }
         currentOperand = "-" + currentOperand
     }
+    
+    func equalButtonTap() {
+        guard inputValidator.isNotCalculated, isCalculationState else {
+            return
+        }
+        delegate?.addCurrentFormulaStack()
+        updateFormulas()
+        let formulas = formulas.joined(separator: " ")
+                               .replacingOccurrences(of: ",", with: "")
+        var formula = ExpressionParser.parse(from: formulas)
+        do {
+            let calcuatorResult = try formula.result()
+            currentOperand = setUpNumberFormat(for: calcuatorResult)
+        } catch let error as CalculatorError {
+            switch error {
+            case .isNaN:
+                currentOperand = error.failureReason ?? "NaN"
+                hasCalculated = true
+                return
+            default:
+                os_log(.error, log: .error, "%@",error.errorDescription ?? error.localizedDescription)
+                return
+            }
+        } catch {
+            os_log(.error, log: .error, "%@", error.localizedDescription)
+        }
+        currentOperator = ""
+        hasCalculated = true
+    }
 }
 
 // MARK: Private Methods
@@ -140,5 +169,19 @@ extension Calculator {
         hasCalculated = false
         delegate?.removeFormulaView()
         delegate?.addCurrentFormulaStack()
+    }
+    
+    private func setUpNumberFormat(for value: Double) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.roundingMode = .up
+        guard let formatterNumber = numberFormatter.string(for: value) else {
+            return value.description
+        }
+        guard formatterNumber.count < 26 else {
+            return formatterNumber.map{ $0.description }[0]
+        }
+        return formatterNumber
     }
 }
