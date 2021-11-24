@@ -17,5 +17,56 @@ protocol CalculatorDelegate {
 
 class Calculator {
     var delegate: CalculatorDelegate?
+    private var inputValidator = InputValidator(for: ("", "0", false))
+    private var formulas: [String] = []
     
+    private var currentOperator: String = "" {
+        didSet {
+            notifyCurrentState()
+            delegate?.updateOperatorLabel(by: currentOperator)
+        }
+    }
+    private var currentOperand: String = "0" {
+        didSet {
+            notifyCurrentState()
+            delegate?.updateOperandLabel(by: currentOperand)
+        }
+    }
+    private var hasCalculated: Bool = false {
+        didSet {
+            notifyCurrentState()
+        }
+    }
+    private var currentStatus: (String, String, Bool) {
+        (currentOperator, currentOperand, hasCalculated)
+    }
+    private var isCalculationState: Bool {
+        currentOperator != ""
+    }
+    
+    func resetStatus() {
+        currentOperator = ""
+        currentOperand = "0"
+        formulas = []
+        hasCalculated = false
+    }
+}
+
+// MARK: Receive Events Related
+extension Calculator {
+    func operandButtonTap(newOperand: String) {
+        let isNotCurrentLabelByZero = (inputValidator.isNotZero || newOperand != "0")
+                                      && (inputValidator.isNotZero || newOperand != "00")
+        guard isNotCurrentLabelByZero && inputValidator.isNotCalculated else {
+            return
+        }
+        currentOperand = inputValidator.updateOperand(by: newOperand)
+    }
+}
+
+// MARK: Private Methods
+extension Calculator {
+    private func notifyCurrentState() {
+        inputValidator.setupStatus(by: currentStatus)
+    }
 }

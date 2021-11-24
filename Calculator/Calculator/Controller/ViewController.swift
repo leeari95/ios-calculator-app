@@ -48,22 +48,18 @@ class ViewController: UIViewController {
     
     private var hasCalculated = false
     
-    private var isNotZero: Bool {
+    var isNotZero: Bool {
         currentOperand != "0"
     }
-    
-    private var isNotCalculated: Bool {
+    var isNotCalculated: Bool {
         hasCalculated == false
     }
-    
-    private var hasDotNotIncluded: Bool {
+    var hasDotNotIncluded: Bool {
         currentOperand.contains(".") == false
     }
-    
-    private var hasMinusNotIncluded: Bool {
+    var hasMinusNotIncluded: Bool {
         currentOperand.contains("-") == false
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,18 +83,10 @@ class ViewController: UIViewController {
 // MARK: IBAction method
 extension ViewController {
     @IBAction func operandButtonTapped(_ sender: UIButton) {
-        guard let newOperand = sender.titleLabel?.text, isNotCalculated,
-                isNotZero || newOperand != "00" else {
+        guard let newOperand = sender.titleLabel?.text else {
             return
         }
-        guard isNotZero else {
-            currentOperand = newOperand
-            return
-        }
-        guard let doubleValue = Double(removeComma(currentOperand) + newOperand) else {
-            return
-        }
-        currentOperand = setUpNumberFormat(for: doubleValue)
+        calculator.operandButtonTap(newOperand: newOperand)
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
