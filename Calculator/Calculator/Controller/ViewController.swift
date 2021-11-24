@@ -64,7 +64,6 @@ class ViewController: UIViewController {
     }
 }
 
-
 // MARK: IBAction
 extension ViewController {
     @IBAction func operandButtonTapped(_ sender: UIButton) {
