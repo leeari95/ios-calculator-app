@@ -104,6 +104,17 @@ extension Calculator {
         }
         currentOperand += "."
     }
+    
+    func plusMinusButtonTap() {
+        guard inputValidator.isNotCalculated, inputValidator.isNotZero else {
+            return
+        }
+        guard inputValidator.hasMinusNotIncluded else {
+            currentOperand.remove(at: currentOperand.startIndex)
+            return
+        }
+        currentOperand = "-" + currentOperand
+    }
 }
 
 // MARK: Private Methods

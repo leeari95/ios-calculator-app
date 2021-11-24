@@ -109,14 +109,7 @@ extension ViewController {
     }
     
     @IBAction func plusMinusButtonTapped(_ sender: UIButton) {
-        guard isNotCalculated, isNotZero else {
-            return
-        }
-        guard hasMinusNotIncluded else {
-            currentOperand.remove(at: currentOperand.startIndex)
-            return
-        }
-        currentOperand = "-" + currentOperand
+        calculator.plusMinusButtonTap()
     }
     
     @IBAction func equalButtonTapped(_ sender: UIButton) {
