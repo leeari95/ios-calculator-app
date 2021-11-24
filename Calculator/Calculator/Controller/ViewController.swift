@@ -105,11 +105,7 @@ extension ViewController {
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
-        guard isNotCalculated, hasDotNotIncluded,
-              let newOperand = sender.titleLabel?.text else {
-            return
-        }
-        currentOperand = currentOperand + newOperand
+        calculator.dotButtonTap()
     }
     
     @IBAction func plusMinusButtonTapped(_ sender: UIButton) {

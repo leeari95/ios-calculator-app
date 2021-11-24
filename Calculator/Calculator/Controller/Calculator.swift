@@ -97,6 +97,13 @@ extension Calculator {
         }
         currentOperand = "0"
     }
+    
+    func dotButtonTap() {
+        guard inputValidator.isNotCalculated, inputValidator.hasDotNotIncluded else {
+            return
+        }
+        currentOperand += "."
+    }
 }
 
 // MARK: Private Methods
