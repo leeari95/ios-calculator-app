@@ -33,7 +33,6 @@ class ViewController: UIViewController {
             operandLabel.text = newValue
         }
     }
-    
     private var currentOperator: String {
         get {
             guard let `operator` = operatorLabel.text else {
@@ -44,21 +43,6 @@ class ViewController: UIViewController {
         set {
             operatorLabel.text = newValue
         }
-    }
-    
-    private var hasCalculated = false
-    
-    var isNotZero: Bool {
-        currentOperand != "0"
-    }
-    var isNotCalculated: Bool {
-        hasCalculated == false
-    }
-    var hasDotNotIncluded: Bool {
-        currentOperand.contains(".") == false
-    }
-    var hasMinusNotIncluded: Bool {
-        currentOperand.contains("-") == false
     }
     
     override func viewDidLoad() {
@@ -135,43 +119,6 @@ extension ViewController {
         calculatorScrollView.layoutIfNeeded()
         let bottomOffset = CGPoint(x: 0, y: calculatorScrollView.contentSize.height - calculatorScrollView.frame.height)
         view.setContentOffset(bottomOffset, animated: false)
-    }
-    
-    private func removeComma(_ value: String) -> String {
-        guard value.contains(",") else {
-            return value
-        }
-        return value.replacingOccurrences(of: ",", with: "")
-    }
-}
-
-// MARK: Calculation Result Related
-extension ViewController {
-    private func setUpNumberFormat(for value: Double) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.roundingMode = .up
-        guard let formatterNumber = numberFormatter.string(for: value) else {
-            return value.description
-        }
-        guard formatterNumber.count < 26 else {
-            return formatterNumber.map{ $0.description }[0]
-        }
-        return formatterNumber
-    }
-}
-
-extension UIStackView {
-    var toString: String {
-        var inputValues = [String]()
-        self.arrangedSubviews.forEach { view in
-            guard let formualStackView = view as? FormulaStackView else {
-                return
-            }
-            inputValues.append(contentsOf: formualStackView.element)
-        }
-        return inputValues.joined(separator: " ")
     }
 }
 
