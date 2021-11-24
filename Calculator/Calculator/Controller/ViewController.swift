@@ -234,9 +234,11 @@ extension UIStackView {
 // MARK: Delegate Implementation
 extension ViewController: CalculatorDelegate {
     func updateOperatorLabel(by newLabelText: String) {
+        currentOperator = newLabelText
     }
     
     func updateOperandLabel(by newLabelText: String) {
+        currentOperand = newLabelText
     }
     
     func removeFormulaView() {
