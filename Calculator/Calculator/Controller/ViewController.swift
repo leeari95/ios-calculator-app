@@ -80,7 +80,8 @@ class ViewController: UIViewController {
     }
 }
 
-// MARK: IBAction method
+
+// MARK: IBAction
 extension ViewController {
     @IBAction func operandButtonTapped(_ sender: UIButton) {
         guard let newOperand = sender.titleLabel?.text else {
