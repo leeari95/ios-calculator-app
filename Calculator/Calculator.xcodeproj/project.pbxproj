@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A1E4C49274E68A6002B09B7 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1E4C48274E68A6002B09B7 /* Calculator.swift */; };
 		9A3E2747273D793900121AF7 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3E2746273D793900121AF7 /* String+extension.swift */; };
 		9A3E2748273D793900121AF7 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3E2746273D793900121AF7 /* String+extension.swift */; };
 		9A3E274A273D79BC00121AF7 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3E2749273D79BC00121AF7 /* ExpressionParser.swift */; };
@@ -53,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		9A1E4C48274E68A6002B09B7 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		9A3E2746273D793900121AF7 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		9A3E2749273D79BC00121AF7 /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		9A52A5F02739245300178B77 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -127,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				C713D9452570E5EB001C3AFC /* ViewController.swift */,
+				9A1E4C48274E68A6002B09B7 /* Calculator.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				9A52A60C2739495900178B77 /* LinkedList.swift in Sources */,
 				9A52A5FE273924DA00178B77 /* CalculateItem.swift in Sources */,
 				9AAC3F98273BF042005D1CE6 /* CalculatorError.swift in Sources */,
+				9A1E4C49274E68A6002B09B7 /* Calculator.swift in Sources */,
 				9A52A61427394DD900178B77 /* LinkedListQueue.swift in Sources */,
 				9A52A60127392AA700178B77 /* CalculatorItemQueue.swift in Sources */,
 				C713D9462570E5EB001C3AFC /* ViewController.swift in Sources */,
