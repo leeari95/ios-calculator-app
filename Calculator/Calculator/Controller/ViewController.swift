@@ -15,6 +15,13 @@ class ViewController: UIViewController {
     @IBOutlet weak var operatorLabel: UILabel!
     @IBOutlet var calculatorButtons: [UIButton]!
     
+    private let calculator = Calculator()
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        self.calculator.delegate = self
+    }
+    
     private var currentOperand: String {
         get {
             guard let operand = operandLabel.text else {
@@ -191,11 +198,7 @@ extension ViewController {
         currentOperand = currentOperand
         addCurrentFormulaStack()
     }
-    
-    private func addCurrentFormulaStack() {
-        let formulaStackView = addFormulaStackView(operand: currentOperand, operator: currentOperator)
-        calculatorStackView.addArrangedSubview(formulaStackView)
-    }
+
     private func addFormulaStackView(operand: String, operator: String) -> UIStackView {
         let formulaStackView = FormulaStackView()
         guard calculatorStackView.subviews.count > 0 else {
@@ -226,12 +229,6 @@ extension ViewController {
     private func updateCurrentLabel(_ newOperator: String) {
         currentOperand = "0"
         currentOperator = newOperator
-    }
-    
-    private func removeFormulaView() {
-        calculatorStackView.subviews.forEach{
-            $0.removeFromSuperview()
-        }
     }
     
     private func removeFormulaLabel() {
@@ -267,5 +264,25 @@ extension UIStackView {
             inputValues.append(contentsOf: formualStackView.element)
         }
         return inputValues.joined(separator: " ")
+    }
+}
+
+// MARK: Delegate Implementation
+extension ViewController: CalculatorDelegate {
+    func updateOperatorLabel(by newLabelText: String) {
+    }
+    
+    func updateOperandLabel(by newLabelText: String) {
+    }
+    
+    func removeFormulaView() {
+        calculatorStackView.subviews.forEach{
+            $0.removeFromSuperview()
+        }
+    }
+    
+    func addCurrentFormulaStack() {
+        let formulaStackView = addFormulaStackView(operand: currentOperand, operator: currentOperator)
+        calculatorStackView.addArrangedSubview(formulaStackView)
     }
 }
