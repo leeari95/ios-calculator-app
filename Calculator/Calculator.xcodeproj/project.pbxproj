@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9A1E4C49274E68A6002B09B7 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1E4C48274E68A6002B09B7 /* Calculator.swift */; };
+		9A1E4C4B274E8C60002B09B7 /* InputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1E4C4A274E8C60002B09B7 /* InputValidator.swift */; };
 		9A3E2747273D793900121AF7 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3E2746273D793900121AF7 /* String+extension.swift */; };
 		9A3E2748273D793900121AF7 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3E2746273D793900121AF7 /* String+extension.swift */; };
 		9A3E274A273D79BC00121AF7 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3E2749273D79BC00121AF7 /* ExpressionParser.swift */; };
@@ -55,6 +56,7 @@
 
 /* Begin PBXFileReference section */
 		9A1E4C48274E68A6002B09B7 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
+		9A1E4C4A274E8C60002B09B7 /* InputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidator.swift; sourceTree = "<group>"; };
 		9A3E2746273D793900121AF7 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		9A3E2749273D79BC00121AF7 /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		9A52A5F02739245300178B77 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -130,6 +132,7 @@
 			children = (
 				C713D9452570E5EB001C3AFC /* ViewController.swift */,
 				9A1E4C48274E68A6002B09B7 /* Calculator.swift */,
+				9A1E4C4A274E8C60002B09B7 /* InputValidator.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -334,6 +337,7 @@
 				9A3E274A273D79BC00121AF7 /* ExpressionParser.swift in Sources */,
 				9A3E2747273D793900121AF7 /* String+extension.swift in Sources */,
 				C713D9442570E5EB001C3AFC /* SceneDelegate.swift in Sources */,
+				9A1E4C4B274E8C60002B09B7 /* InputValidator.swift in Sources */,
 				9AAC3FA8273CB284005D1CE6 /* Double+extension.swift in Sources */,
 				9AAC3F9F273C2D44005D1CE6 /* Formula.swift in Sources */,
 			);
