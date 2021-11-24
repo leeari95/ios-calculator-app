@@ -80,6 +80,23 @@ extension Calculator {
         updateFormulas()
         setupNextCalculated(newOperator)
     }
+    
+    func allClearButtonTap() {
+        resetStatus()
+        delegate?.removeFormulaView()
+    }
+    
+    func clearEntryButtonTap() {
+        guard inputValidator.isNotZero else {
+            return
+        }
+        guard inputValidator.isNotCalculated else {
+            delegate?.removeFormulaView()
+            resetStatus()
+            return
+        }
+        currentOperand = "0"
+    }
 }
 
 // MARK: Private Methods

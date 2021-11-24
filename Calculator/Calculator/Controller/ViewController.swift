@@ -63,7 +63,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        removeFormulaLabel()
+        calculator.resetStatus()
         removeFormulaView()
     }
     
@@ -97,22 +97,11 @@ extension ViewController {
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
-        guard isNotZero || currentOperand != "" else {
-            return
-        }
-        guard isNotCalculated else {
-            hasCalculated = false
-            removeFormulaView()
-            removeFormulaLabel()
-            return
-        }
-        currentOperand = "0"
+        calculator.clearEntryButtonTap()
     }
     
     @IBAction func allClearButtonTapped(_ sender: UIButton) {
-        removeFormulaLabel()
-        removeFormulaView()
-        hasCalculated = false
+        calculator.allClearButtonTap()
     }
     
     @IBAction func dotButtonTapped(_ sender: UIButton) {
@@ -190,14 +179,6 @@ extension ViewController {
             return value
         }
         return value.replacingOccurrences(of: ",", with: "")
-    }
-}
-
-// MARK: Label Initialization Related
-extension ViewController {
-    private func removeFormulaLabel() {
-        currentOperand = "0"
-        currentOperator = ""
     }
 }
 
