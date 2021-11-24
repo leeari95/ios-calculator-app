@@ -62,11 +62,48 @@ extension Calculator {
         }
         currentOperand = inputValidator.updateOperand(by: newOperand)
     }
+    
+    func operatorButtonTap(newOperator: String) {
+        guard inputValidator.isNotNaN else {
+            return
+        }
+        guard inputValidator.isNotCalculated else {
+            startNewCalculation()
+            setupNextCalculated(newOperator)
+            return
+        }
+        guard inputValidator.isNotZero else {
+            currentOperator = newOperator
+            return
+        }
+        delegate?.addCurrentFormulaStack()
+        updateFormulas()
+        setupNextCalculated(newOperator)
+    }
 }
 
 // MARK: Private Methods
 extension Calculator {
     private func notifyCurrentState() {
         inputValidator.setupStatus(by: currentStatus)
+    }
+    
+    private func updateFormulas() {
+        guard formulas.count > 0 else {
+            formulas.append(currentOperand)
+            return
+        }
+        formulas.append(contentsOf: [currentOperator, currentOperand])
+    }
+    
+    private func setupNextCalculated(_ newOperator: String) {
+        currentOperand = "0"
+        currentOperator = newOperator
+    }
+
+    private func startNewCalculation() {
+        hasCalculated = false
+        delegate?.removeFormulaView()
+        delegate?.addCurrentFormulaStack()
     }
 }

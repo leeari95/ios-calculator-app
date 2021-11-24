@@ -90,22 +90,10 @@ extension ViewController {
     }
     
     @IBAction func operatorButtonTapped(_ sender: UIButton) {
-        guard currentOperand != "NaN",
-              let newOperator = sender.titleLabel?.text else {
+        guard let newOperator = sender.titleLabel?.text else {
             return
         }
-        guard isNotCalculated else {
-            startNewCalculation()
-            updateCurrentLabel(newOperator)
-            return
-        }
-        guard isNotZero else {
-            operatorLabel.text = sender.titleLabel?.text
-            return
-        }
-        addCurrentFormulaStack()
-        updateCurrentLabel(newOperator)
-        scrollToBottom(calculatorScrollView)
+        calculator.operatorButtonTap(newOperator: newOperator)
     }
     
     @IBAction func clearEntryButtonTapped(_ sender: UIButton) {
@@ -180,13 +168,6 @@ extension ViewController {
 
 // MARK: Formula Stack View Related
 extension ViewController {
-    private func startNewCalculation() {
-        hasCalculated = false
-        removeFormulaView()
-        currentOperand = currentOperand
-        addCurrentFormulaStack()
-    }
-
     private func addFormulaStackView(operand: String, operator: String) -> UIStackView {
         let formulaStackView = FormulaStackView()
         guard calculatorStackView.subviews.count > 0 else {
@@ -214,11 +195,6 @@ extension ViewController {
 
 // MARK: Label Initialization Related
 extension ViewController {
-    private func updateCurrentLabel(_ newOperator: String) {
-        currentOperand = "0"
-        currentOperator = newOperator
-    }
-    
     private func removeFormulaLabel() {
         currentOperand = "0"
         currentOperator = ""
