@@ -391,25 +391,27 @@
 
 ### 4. 버튼의 모양을 둥글게 만들기
 
-- `상황` 엘림에게 버튼을 둥글게 만들어보는 도전과제를 받게되어 해결해보기로 하였다.
-- `시도` 처음에는 버튼 자체가 코드가 아닌 스토리보드에서 생성된 버튼이라서 인터페이스 빌더로 해결해보고자 하였다.
-    
-    ```swift
-        extension UIView {
-            @IBInspectable var cornerRadius: CGFloat {
-                get {
-                    return layer.cornerRadius
-                }
-                set {
-                    layer.cornerRadius = newValue
-                    layer.masksToBounds = newValue > 0
-                }
+`상황` 엘림에게 버튼을 둥글게 만들어보는 도전과제를 받게되어 해결해보기로 하였다.
+
+`시도-1`  처음에는 버튼 자체가 코드가 아닌 스토리보드에서 생성된 버튼이라서 인터페이스 빌더로 해결해보고자 하였다.
+
+```swift
+    extension UIView {
+        @IBInspectable var cornerRadius: CGFloat {
+            get {
+                return layer.cornerRadius
+            }
+            set {
+                layer.cornerRadius = newValue
+                layer.masksToBounds = newValue > 0
             }
         }
-    ```
-    
+    }
+```
+
 - 그러나 이 방법으로는 버튼의 cornerRadius를 직접 대입해주는 방식이기 때문에 디바이스가 다를 경우 내가 원하는 결과를 얻기에는 힘들다고 판단되었다. 그래서 코드로 해볼 수 있는 방법을 찾아 해결해보았다.
-- `결과`
+
+`시도-2` 
 
 ```swift
     override func viewWillLayoutSubviews() {
@@ -428,6 +430,60 @@
 - 제약이나 오토레이아웃을 사용하지 않았다면, 서브뷰의 레이아웃을 업데이트하기 적합한 시점이다.
 - 여러번 중복으로 호출될 수 있다.
     - 메인뷰의 서브뷰가 로드되는 경우
+- 메소드를 알아보고 엘림의 피드백을 받고 다시 디버깅을 해보니 `버튼이 클릭이 되는 시점`마다 해당 메소드가 호출이 되고있었다.  cornerRadius를 잡아주는 for문이 버튼이 누를때마다 실행되고 있었던 것이다. 즉 SubView의 레이아웃을 잡아주기에는 적절치 못한 메소드였다.
+
+`시도-3, 그리고 해결` 
+
+- 버튼의 IBOutlet에 didSet을 줄 수도 있었지만 아래와 같은 문제 때문에 해당 방법은 불가능 했다.
+    
+   ![](https://i.imgur.com/TGNgcJQ.png)
+    
+- 디버깅을 해보니 `viewWillLayoutSubviews` 메소드가 호출되는 시점에 레이아웃이 갱신되어 버튼의 너비가 바뀌고 있었다.
+(디바이스는 아이폰 SE 기준이다. SE 이상 디바이스에서는 없던 문제였다.)
+IBOutlet의 didSet은 `viewDidLoad가 호출되기 전`에 호출되므로 적절하지 못한 방법이였다.
+- 따라서 최소한으로 적게 호출되는 `updateViewConstraints`메소드를 활용하여 해당 문제를 해결하였다.
+    
+    ```swift
+    func setupButtons() {
+        calculatorButtons.forEach { button in
+            button.layoutIfNeeded()
+            button.layer.cornerRadius = button.layer.bounds.width / 2
+        }
+    }
+    
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        setupButtons()
+    }
+    ```
+    
+- updateViewConstraints에 버튼셋팅 메소드를 호출하고있고, for문 내부에서 버튼마다 `layoutIfNeeded`를 호출하여 레이아웃을 갱신하고 이후 cornerRadius 값을 대입해주고있다.
+- 레이아웃을 갱신하는 이유는 갱신하지 않으면 위 디버깅시 발견하였던 최종 레이아웃이 아니라 임의로 잡혀있던 frame값으로 계산을 하기 때문에 아래처럼 찌그러진 원이 나온다.
+    
+   ![](https://i.imgur.com/7Qr05cE.png)
+    
+`결론`
+
+- viewDidLoad에서 frame사이즈가 정확하지 않을 수 있다. 해당 함수는 뷰는 로드됐다고 확인할 수 있지만, 배치가 됐다고 할수는 없다. 따라서 위와 같은 현상은 viewDidLoad에서 임의로 잡혔던 frame값이 `viewWillLayoutSubviews`가 호출하면서 하위 뷰가 배치되고 이후 값이 변했다고 볼 수 있겠다. 따라서 하위뷰가 배치가 되고나서 버튼의 레이아웃을 잡아줘야 해결이 가능했던 것이다.
+
+### 여기서 의문점이 드는 것은 다른 디바이스들은 상관없는데 왜 SE에서만 버튼의 크기가 줄어드는 것일까?
+
+- 3기 캠퍼 `수박` 의 도움으로 해당 의문점을 풀 수 있었다.
+
+![https://i.imgur.com/MiyseWl.png](https://i.imgur.com/MiyseWl.png)
+
+- HIG에서 장치들의 치수를 확인해서 세로를 보면 200~300정도 차이가 나는 것을 확인할 수 있다.
+사진에서도 볼 수 있듯이 세로 크기가 엄청 차이난다.
+따라서 작아진 디바이스에 오토 레이아웃을 충족하기 위해 버튼의 크기를 줄일 수 밖에 없다는 추측이 가능해졌다.
+- 이러한 사실을 증명해낼 수도 있다. 직접 레이아웃을 다 계산하여 치수와 맞는지 확인할 수도 있지만... 나중에 시도해봐야겠다. 😇
+
+### 🤩 `수박`에게 답변받는 와중에 받았던 조언
+
+- didSet으로 UI 요소들의 레이아웃을 잡아주는건 부자연스럽다. 오히려 지금처럼 view가 배치된 후 레이아웃을 잡아준 것이 자연스럽고 좋은 방법이다.
+- 그리고 UI 인스턴스를 생성할때 클로저로 선언하는 방법이 있고, 인스턴스로 선언 이후 값을 변경해줄 수도 있다.
+- 선언 이후 값을 변경해주는 방법은 문맥상 부자연스러울 수 있으므로 지양하는게 좋은 것 같다는 의견.
+    - let으로 선언후 값을 변경해주는 거니까 부자연스럽다는 늬앙스!
+    - 애초에 클로저로 선언하여 요소의 속성들을 설정해주고 그대로 쭉 사용하는게 더 자연스럽다!
 
 ## 3-4 배운 개념
 
@@ -444,6 +500,10 @@
 - `@IBInspectable`
 - `viewWillLayoutSubviews()`
 - 커스텀뷰를 만드는 방법 (only Code)
+    - `init(frame:)`와 `init(coder:)`의 차이점
+- `View Life Cycle`의 대한 깊은 이해
+- `frame`과 `bounds`의 차이점
+- `IBOutlet`의 `didSet`은 언제 `trigger`되는지?
 
 ## 3-5 PR 후 개선사항
 
