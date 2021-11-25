@@ -126,25 +126,7 @@ extension Calculator {
         }
         delegate?.addCurrentFormulaStack()
         updateFormulas()
-        let formulas = formulas.joined(separator: " ")
-                               .replacingOccurrences(of: ",", with: "")
-        var formula = ExpressionParser.parse(from: formulas)
-        do {
-            let calcuatorResult = try formula.result()
-            currentOperand = calcuatorResult.description
-        } catch let error as CalculatorError {
-            switch error {
-            case .isNaN:
-                currentOperand = error.failureReason ?? "NaN"
-                hasCalculated = true
-                return
-            default:
-                os_log(.error, log: .error, "%@",error.errorDescription ?? error.localizedDescription)
-                return
-            }
-        } catch {
-            os_log(.error, log: .error, "%@", error.localizedDescription)
-        }
+        setupResultValue()
         currentOperator = ""
         hasCalculated = true
     }
@@ -173,5 +155,27 @@ extension Calculator {
         hasCalculated = false
         delegate?.removeFormulaView()
         delegate?.addCurrentFormulaStack()
+    }
+    
+    private func setupResultValue() {
+        let formulas = formulas.joined(separator: " ")
+            .replacingOccurrences(of: ",", with: "")
+        var formula = ExpressionParser.parse(from: formulas)
+        do {
+            let calcuatorResult = try formula.result()
+            currentOperand = calcuatorResult.description
+        } catch let error as CalculatorError {
+            switch error {
+            case .isNaN:
+                currentOperand = error.failureReason ?? "NaN"
+                hasCalculated = true
+                return
+            default:
+                os_log(.error, log: .error, "%@",error.errorDescription ?? error.localizedDescription)
+                return
+            }
+        } catch {
+            os_log(.error, log: .error, "%@", error.localizedDescription)
+        }
     }
 }
