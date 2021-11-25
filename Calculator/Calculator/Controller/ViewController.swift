@@ -109,10 +109,11 @@ extension ViewController {
         return formulaStackView
     }
     
-    private func scrollToBottom(_ view: UIScrollView) {
+    private func scrollToBottom() {
         calculatorScrollView.layoutIfNeeded()
-        let bottomOffset = CGPoint(x: 0, y: calculatorScrollView.contentSize.height - calculatorScrollView.frame.height)
-        view.setContentOffset(bottomOffset, animated: false)
+        let bottomOffset = CGPoint(x: 0, y: calculatorScrollView.contentSize.height
+                                            - calculatorScrollView.frame.height)
+        calculatorScrollView.setContentOffset(bottomOffset, animated: false)
     }
     
     func setUpNumberFormat(for value: Double) -> String {
@@ -158,5 +159,6 @@ extension ViewController: CalculatorDelegate {
     func addCurrentFormulaStack() {
         let formulaStackView = addFormulaStackView(operand: currentOperand, operator: currentOperator)
         calculatorStackView.addArrangedSubview(formulaStackView)
+        scrollToBottom()
     }
 }
