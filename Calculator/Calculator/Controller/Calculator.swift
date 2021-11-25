@@ -55,9 +55,13 @@ class Calculator {
 // MARK: Receive Events Related
 extension Calculator {
     func operandButtonTap(newOperand: String) {
+        let hasLimitDigitNotExceeded = currentOperand
+                                        .replacingOccurrences(of: ",", with: "")
+                                        .count < 16
         let isNotCurrentLabelByZero = (inputValidator.isNotZero || newOperand != "0")
                                       && (inputValidator.isNotZero || newOperand != "00")
-        guard isNotCurrentLabelByZero && inputValidator.isNotCalculated else {
+        guard isNotCurrentLabelByZero && inputValidator.isNotCalculated,
+              hasLimitDigitNotExceeded else {
             return
         }
         currentOperand = inputValidator.updateOperand(by: newOperand)
@@ -127,7 +131,7 @@ extension Calculator {
         var formula = ExpressionParser.parse(from: formulas)
         do {
             let calcuatorResult = try formula.result()
-            currentOperand = setUpNumberFormat(for: calcuatorResult)
+            currentOperand = calcuatorResult.description
         } catch let error as CalculatorError {
             switch error {
             case .isNaN:
@@ -169,19 +173,5 @@ extension Calculator {
         hasCalculated = false
         delegate?.removeFormulaView()
         delegate?.addCurrentFormulaStack()
-    }
-    
-    private func setUpNumberFormat(for value: Double) -> String {
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        numberFormatter.maximumSignificantDigits = 20
-        numberFormatter.roundingMode = .up
-        guard let formatterNumber = numberFormatter.string(for: value) else {
-            return value.description
-        }
-        guard formatterNumber.count < 26 else {
-            return formatterNumber.map{ $0.description }[0]
-        }
-        return formatterNumber
     }
 }

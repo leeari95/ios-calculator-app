@@ -114,6 +114,20 @@ extension ViewController {
         let bottomOffset = CGPoint(x: 0, y: calculatorScrollView.contentSize.height - calculatorScrollView.frame.height)
         view.setContentOffset(bottomOffset, animated: false)
     }
+    
+    func setUpNumberFormat(for value: Double) -> String {
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.maximumSignificantDigits = 20
+        numberFormatter.roundingMode = .up
+        guard let formatterNumber = numberFormatter.string(for: value) else {
+            return value.description
+        }
+        guard formatterNumber.count < 26 else {
+            return formatterNumber.map{ $0.description }[0]
+        }
+        return formatterNumber
+    }
 }
 
 // MARK: Delegate Implementation
@@ -123,7 +137,18 @@ extension ViewController: CalculatorDelegate {
     }
     
     func updateOperandLabel(by newLabelText: String) {
-        currentOperand = newLabelText
+        guard let doubleValue = Double(newLabelText.replacingOccurrences(of: ",", with: "")) else {
+            return
+        }
+        guard doubleValue != 0 else {
+            currentOperand = newLabelText
+            return
+        }
+        guard newLabelText.last != "." else {
+            currentOperand = setUpNumberFormat(for: doubleValue) + "."
+            return
+        }
+        currentOperand = setUpNumberFormat(for: doubleValue)
     }
     
     func removeFormulaView() {
