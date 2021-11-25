@@ -152,9 +152,7 @@ extension ViewController: CalculatorDelegate {
     }
     
     func removeFormulaView() {
-        calculatorStackView.subviews.forEach{
-            $0.removeFromSuperview()
-        }
+        calculatorStackView.removeAllArrangedSubviews()
     }
     
     func addCurrentFormulaStack() {

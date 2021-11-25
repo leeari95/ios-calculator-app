@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		9A1E4C49274E68A6002B09B7 /* Calculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1E4C48274E68A6002B09B7 /* Calculator.swift */; };
 		9A1E4C4B274E8C60002B09B7 /* InputValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1E4C4A274E8C60002B09B7 /* InputValidator.swift */; };
+		9A1E4C4F274F8623002B09B7 /* UIStackView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1E4C4E274F8623002B09B7 /* UIStackView+extension.swift */; };
 		9A3E2747273D793900121AF7 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3E2746273D793900121AF7 /* String+extension.swift */; };
 		9A3E2748273D793900121AF7 /* String+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3E2746273D793900121AF7 /* String+extension.swift */; };
 		9A3E274A273D79BC00121AF7 /* ExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A3E2749273D79BC00121AF7 /* ExpressionParser.swift */; };
@@ -57,6 +58,7 @@
 /* Begin PBXFileReference section */
 		9A1E4C48274E68A6002B09B7 /* Calculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calculator.swift; sourceTree = "<group>"; };
 		9A1E4C4A274E8C60002B09B7 /* InputValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputValidator.swift; sourceTree = "<group>"; };
+		9A1E4C4E274F8623002B09B7 /* UIStackView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIStackView+extension.swift"; sourceTree = "<group>"; };
 		9A3E2746273D793900121AF7 /* String+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+extension.swift"; sourceTree = "<group>"; };
 		9A3E2749273D79BC00121AF7 /* ExpressionParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExpressionParser.swift; sourceTree = "<group>"; };
 		9A52A5F02739245300178B77 /* CalculatorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CalculatorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -163,6 +165,7 @@
 				9AAC3FA7273CB284005D1CE6 /* Double+extension.swift */,
 				9A3E2746273D793900121AF7 /* String+extension.swift */,
 				9A55A749274A4B4C0011EEC2 /* OSLog+extension.swift */,
+				9A1E4C4E274F8623002B09B7 /* UIStackView+extension.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -326,6 +329,7 @@
 				9A55A74A274A4B4C0011EEC2 /* OSLog+extension.swift in Sources */,
 				9A55A74627476B180011EEC2 /* FormulaStackView.swift in Sources */,
 				9A52A60C2739495900178B77 /* LinkedList.swift in Sources */,
+				9A1E4C4F274F8623002B09B7 /* UIStackView+extension.swift in Sources */,
 				9A52A5FE273924DA00178B77 /* CalculateItem.swift in Sources */,
 				9AAC3F98273BF042005D1CE6 /* CalculatorError.swift in Sources */,
 				9A1E4C49274E68A6002B09B7 /* Calculator.swift in Sources */,
