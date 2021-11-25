@@ -5,7 +5,6 @@
 // 
 
 import UIKit
-import OSLog
 
 class ViewController: UIViewController {
     // MARK: Property and LifeCycle
