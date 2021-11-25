@@ -17,11 +17,6 @@ class ViewController: UIViewController {
     
     private let calculator = Calculator()
     
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        self.calculator.delegate = self
-    }
-    
     private var currentOperand: String {
         get {
             guard let operand = operandLabel.text else {
@@ -47,6 +42,7 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.calculator.delegate = self
         calculator.resetStatus()
         removeFormulaView()
     }
