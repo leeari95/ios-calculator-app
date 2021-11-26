@@ -99,14 +99,10 @@ extension ViewController {
 // MARK: Formula Stack View Related
 extension ViewController {
     private func addFormulaStackView(operand: String, operator: String) -> UIStackView {
-        let formulaStackView = FormulaStackView()
         guard calculatorStackView.subviews.count > 0 else {
-            formulaStackView.addLabel(operand)
-            return formulaStackView
+            return FormulaStackView(operand: operand)
         }
-        formulaStackView.addLabel(`operator`)
-        formulaStackView.addLabel(operand)
-        return formulaStackView
+        return FormulaStackView(operand: operand, opreator: `operator`)
     }
     
     private func scrollToBottom() {
