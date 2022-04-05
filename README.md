@@ -1,63 +1,367 @@
+
+# 🧮 계산기 프로젝트
+
+* 개인 프로젝트
+* 프로젝트 기간: 2021.11.08 ~ 2021.11.19
+
+# 목차
+
 - [키워드](#키워드)
-- [Reviewers](#Reviewers)
-- [STEP 1 : Queue **타입 구현**](#STEP-1--Queue-타입-구현)
-    + [고민했던 것](#1-1-고민했던-것)
-    + [의문점](#1-2-의문점)
-    + [Trouble Shooting](#1-3-Trouble-Shooting)
-    + [배운 개념](#1-4-배운-개념)
-    + [PR 후 개선사항](#1-5-PR-후-개선사항)
-- [STEP 2 : 계산 타입 및 주변 타입 구현](#STEP-2--계산-타입-및-주변-타입-구현)
-    + [고민했던 것](#2-1-고민했던-것)
-    + [의문점](#2-2-의문점)
-    + [Trouble Shooting](#2-3-Trouble-Shooting)
-    + [배운 개념](#2-4-배운-개념)
-    + [PR 후 개선사항](#2-5-PR-후-개선사항)
-- [STEP 3 : 계산기 UI 연동](#STEP-3--계산기-UI-연동)
-    + [고민했던 것](#3-1-고민했던-것)
-    + [의문점](#3-2-의문점)
-    + [Trouble Shooting](#3-3-Trouble-Shooting)
-    + [배운 개념](#3-4-배운-개념)
-    + [PR 후 개선사항](#3-5-PR-후-개선사항)
+- [프로젝트 소개](#%EF%B8%8F-프로젝트-소개)
+- [프로젝트 주요기능](#-프로젝트-주요기능)
+- [UML](#uml)
+- [Trouble Shooting](#-trouble-shooting)
+    + ["스크롤이 먹히는 문제"](#스크롤이-먹히는-문제)
+    + ["깊은 계층에 위치해있는 뷰의 요소를 깔끔하게 꺼내오려면?"](#깊은-계층에-위치해있는-뷰의-요소를-깔끔하게-꺼내오려면)
+    + ["스크롤 바로 인해 내부 Label의 Text가 가려지는 문제"](#스크롤-바로-인해-내부-label의-text가-가려지는-문제)
+    + ["버튼의 모양을 둥글게 다듬어보기"](#버튼의-모양을-둥글게-다듬어보기)
+- [새롭게 알게된 것](#-새롭게-알게된-것)
+    + ["Array에 제네릭 타입이 Element가 기재되어있는 경우"](#array에-제네릭-타입이-element가-기재되어있는-경우)
+    + ["removeAll vs 빈 배열 할당하기"](#removeall-vs-빈-배열-할당하기)
+    + ["빈 프로토콜의 존재 의미"](#빈-프로토콜의-존재-의미)
+    + ["split vs components"](#split-vs-components)
+    + ["`viewWillLayoutSubviews()`는 무슨 역할을 할까?"](#viewwilllayoutsubviews는-무슨-역할을-할까)
 
-# 계산기 프로젝트
-
-1. 프로젝트 기간: 2021.11.08 - 2021.11.19
-2. Grounds Rules
-    - 10시에 스크럼 시작
-    - 프로젝트가 중심이 아닌 학습과 이유에 초점을 맞추기
-    - 의문점을 그냥 넘어가지 않기
-    - Time Rule
-        - 아침: 10시
-        - 점심시간: 12시~ 1시
-        - 저녁시간: 6시~7시
-        - 프로젝트 최대 시간: 9시 ~ 최대 9시 30분 까지!
-3. 커밋 규칙
-    - 단위 : 기능단위
-    - 커밋 Convention: Karma Style
+</br>
 
 # 키워드
-- `Array` `LinkedList`
-- `Queue` `Stack`
+
+### `Swift`
+
 - `Generic` `Element`
-- `TDD` `Unit Test`
 - `map` `filter` `split` `compactMap`
-- `UML`
 - `FloatingPoint` `Numeric`
 - `protocol` `extension`
 - `attribute`
+- `replacingOccurrences`
+- `split vs components`
+
+### `iOS`
+
+- `Delegation pattern` 
+- `TDD` `Unit Test`
 - `UIStackView` `UIScrollView`
 - `NumberFormatter`
 - `Auto Layout`
 - `layoutIfNeeded()` `setNeedsLayout()`
 - `Main Run Loop` `Update Cycle`
-- `replacingOccurrences`
-- `split vs components`
 - `viewDidLoad` `viewWillLayoutSubviews`
 - `IBInspectable`
 
-# Reviewers
+### `etc`
 
-* [lina0322](https://github.com/lina0322)
+- `UML`
+- `Array` `LinkedList`
+- `Queue` `Stack`
+
+</br>
+
+## ⭐️ 프로젝트 소개
+
+아이폰의 기본 앱인 계산기 앱과 흡사한 기능을 가진 앱이에요. 🤓
+
+심플한 UI 및 간단한 기능을 통해 계산을 할 수 있어요! 💪🏻
+
+</br>
+
+## ✨ 프로젝트 주요기능
+
+> 🧮 덧셈, 뺄셈, 곱셈, 나눗셈을 할 수 있습니다! 
+
+<img src="https://i.imgur.com/T5a0loL.gif"> <img src="https://i.imgur.com/a6VCYO6.gif"> <img src="https://i.imgur.com/Q9tqGIN.gif">
+
+> 🛠 모두 초기화, 부분 초기화, 토글 버튼을 통해 현재 계산상태를 변경할 수 있어요.
+
+<img src="https://i.imgur.com/XUcUiip.gif"> <img src="https://i.imgur.com/JA0Qm6O.gif"> <img src="https://i.imgur.com/wkZ9NGe.gif">
+
+> ✍🏻 계산이 끝나고, 이어서 계산할 수 있어요
+
+<img src="https://i.imgur.com/c6oBGvZ.gif">
+
+</br>
+
+## UML
+
+![](https://i.imgur.com/XBotKoP.png)
+
+</br>
+
+## 🛠 Trouble Shooting
+
+### "스크롤이 먹히는 문제"
+
+- `상황`
+    - 스크롤 뷰의 콘텐츠 뷰 원점을 설정하는 메소드를 활용해보았다.
+    
+    ```swift
+    let bottomOffset = CGPoint(x: 0, y: scrollView.contentSize.height - scrollView.bounds.height + scrollView.contentInset.bottom)
+    scrollView.setContentOffset(bottomOffset, animated: false)
+    ```
+    
+    - 그러나 스크롤 바가 생길때 약간 움직이면서 스크롤이 안되는... 이상해보이는 애니메이션을 취하는 문제가 발생했다.
+
+    <img src="https://i.imgur.com/v4OYFOe.gif" width=30%>
+    
+    - 이 문제를 해결해보기 위해서 1차적으로 구글링을 통해 찾아보았고, 찾는데 어려움이 있어 3기 캠퍼 선배분들에게도 질문해보았지만 해결방법을 찾지 못했다.
+- `이유`
+    - 3기 캠퍼 `수박`의 도움으로 LLDB를 활용하여 처음 y좌표가 어떤 값으로 찍히는지 확인해보았으나, StackView가 추가되고 난 후 업데이트 되어 y값 좌표가 계산이 되어야 하는데, 버튼을 누르기 이전의 y좌표가 찍히는 것이 확인되었다.
+    - 타이머나 비동기적으로 해당 부분을 해결해보려고 해보았으나 발만 담궈봤지 제대로 배워보지 않은 지식이라 해결하는데 많은 어려움이 있었다.
+    - 이후 서포터즈 `Wody`에게 질문해보았고 얼마 지나지 않아 해결을 할 수 있게 되었다.
+- 정상적으로 하단으로 자동 스크롤이 되는 모습
+
+    <img src="https://i.imgur.com/uUW8GWB.gif" width=30%>
+
+- `layoutIfNeeded()`라는 메소드를 활용하여 해결하게 되었다. 이 메소드는 `setNeedsLayout()`과 같이 수동으로 layoutSubviews를 예약하는 행위이지만 해당 예약을 바로 실행시키는 동기적으로 작동하는 메소드다. update cycle이 올 때 까지 기다려 layoutSubviews를 호출시키는 것이 아니라 그 즉시 layoutSubviews를 발동시키는 메소드다.
+- 만일 main run loop에서 하나의 View가 setNeedsLayout을 호출하고 그 다음 layoutIfNeeded를 호출한다면 layoutIfNeeded는 그 즉시 View의 값이 재계산되고 화면에 반영하기 때문에 setNeedsLayout이 예약한 layoutSubviews 메소드는 update cycle에서 반영해야할 변경된 값이 존재하지 않기 때문에 호출되지 않는다.
+- 이러한 동작 원리로 `layoutIfNeeded()`는 그 즉시 값이 변경되어야 하는 애니메이션에서 많이 사용된다고 한다.
+- `해결`
+    - 따라서 스크롤뷰의 원점에 대한 콘텐츠뷰의 오프셋 설정을 해주기 전에 `layoutIfNeeded()` 메소드를 호출하여 layout을 업데이트 하고 setContentOffset을 설정해주었더니 해당 문제에 대해서 해결되었다.
+    
+ ### "깊은 계층에 위치해있는 뷰의 요소를 깔끔하게 꺼내오려면?"
+
+- `상황` **스택뷰 > 스택뷰 > 레이블** 계층을 가진 부분에서 레이블의 텍스트를 꺼내려면 `arrangedSubviews`를 `이중 for문`을 돌면서 가져와야 하는 상황이 마음에 안들었다.
+    
+    ```swift
+    extension UIStackView {
+        var toString: String {
+            var inputValues = [String]()
+                    self.arrangedSubviews.forEach{ view in
+                let subview = view as? UIStackView
+                subview?.arrangedSubviews.forEach{ view in
+                    let label = view as? UILabel
+                    guard let input = label?.text else {
+                        return
+                    }
+                    inputValues.append(input.replacingOccurrences(of: ",", with: ""))
+                }
+            }
+            return inputValues.joined(separator: " ")
+        }
+    }
+    ```
+    
+- `해결방향` 리뷰어 엘림에게 조언을 구해서 `스택뷰 > 커스텀뷰` 계층을 가질 수 있도록 커스텀뷰 만들기에 도전해보았다.
+- `결과`
+    
+    ```swift
+    extension UIStackView {
+        var toString: String {
+            var inputValues = [String]()
+            self.arrangedSubviews.forEach { view in
+                guard let formualStackView = view as? FormulaStackView else {
+                    return
+                }
+                inputValues.append(contentsOf: formualStackView.element)
+            }
+            return inputValues.joined(separator: " ")
+        }
+    }
+    ```
+    
+- `FormulaStackView`라는 커스텀 뷰를 만들어 줌으로써 이중 for문을 돌던 문제도 해결이 되었고, ViewController에서 스택뷰 내부에 `Label을 추가`해주는 부분도 커스텀뷰 내부에서 해결할 수 있게되었다.
+
+### "스크롤 바로 인해 내부 Label의 Text가 가려지는 문제"
+
+<img src="https://user-images.githubusercontent.com/49546979/142418073-e9de7219-2754-482e-9f7d-ad3f77633c48.png" width=30%>
+
+- `상황` 계산내역이 쌓여서 스크롤바가 생기는 문제로 스크롤을 진행할 시 글씨가 가려지는 문제가 있었다.
+- `해결방향` 스크롤바를 가릴 수 있는 방법이 없는지 구글링을 통해서 찾아보았다.
+- `결과`
+- 찾아보니 인터페이스 빌더에서도 설정을 해줄 수도 있고 코드로도 해당 문제를 해결할 수 있었다.
+    - 코드로 설정하기
+        
+        ```swift
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+        ```
+        
+        - 인터페이스 빌더에서 없애기
+        
+        ![https://i.imgur.com/rOkoBw3.png](https://i.imgur.com/rOkoBw3.png)
+        
+        위 사진에서 체크를 풀어주면 된다.
+        
+
+### "버튼의 모양을 둥글게 다듬어보기"
+
+`상황` 엘림에게 버튼을 둥글게 만들어보는 도전과제를 받게되어 해결해보기로 하였다.
+
+`시도-1`  처음에는 버튼 자체가 코드가 아닌 스토리보드에서 생성된 버튼이라서 인터페이스 빌더로 해결해보고자 하였다.
+
+```swift
+    extension UIView {
+        @IBInspectable var cornerRadius: CGFloat {
+            get {
+                return layer.cornerRadius
+            }
+            set {
+                layer.cornerRadius = newValue
+                layer.masksToBounds = newValue > 0
+            }
+        }
+    }
+```
+
+- 그러나 이 방법으로는 버튼의 cornerRadius를 직접 대입해주는 방식(하드코딩)이기 때문에 디바이스가 다를 경우 내가 원하는 결과를 얻기에는 힘들다고 판단되었다. 그래서 코드로 해볼 수 있는 방법을 찾아 해결해보았다.
+
+`시도-2` 
+
+```swift
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        calculatorButtons.forEach { button in
+            button.layer.cornerRadius = button.layer.frame.size.width / 2
+        }
+    }
+```
+
+- 버튼의 너비 / 2를 해서 cornerRadius를 설정해준 코드다. 이때 `viewWillLayoutSubviews` 메소드를 써준다.
+
+`시도-3, 그리고 해결` 
+
+- 버튼의 IBOutlet에 didSet을 줄 수도 있었지만 아래와 같은 문제 때문에 해당 방법은 불가능 했다.
+    
+   ![](https://i.imgur.com/TGNgcJQ.png)
+    
+- 디버깅을 해보니 `viewWillLayoutSubviews` 메소드가 호출되는 시점에 레이아웃이 갱신되어 버튼의 너비가 바뀌고 있었다.
+(디바이스는 아이폰 SE 기준이다. SE 이상 디바이스에서는 없던 문제였다.)
+IBOutlet의 didSet은 `viewDidLoad가 호출되기 전`에 호출되므로 적절하지 못한 방법이였다.
+- 따라서 최소한으로 적게 호출되는 `updateViewConstraints`메소드를 활용하여 해당 문제를 해결하였다.
+    
+    ```swift
+    func setupButtons() {
+        calculatorButtons.forEach { button in
+            button.layoutIfNeeded()
+            button.layer.cornerRadius = button.layer.bounds.width / 2
+        }
+    }
+    
+    override func updateViewConstraints() {
+        super.updateViewConstraints()
+        setupButtons()
+    }
+    ```
+    
+- updateViewConstraints에 버튼셋팅 메소드를 호출하고있고, for문 내부에서 버튼마다 `layoutIfNeeded`를 호출하여 레이아웃을 갱신하고 이후 cornerRadius 값을 대입해주고있다.
+- 레이아웃을 갱신하는 이유는 갱신하지 않으면 위 디버깅시 발견하였던 최종 레이아웃이 아니라 임의로 잡혀있던 frame값으로 계산을 하기 때문에 아래처럼 찌그러진 원이 나온다.
+    
+   ![](https://i.imgur.com/7Qr05cE.png)
+    
+`결론`
+
+- viewDidLoad에서 frame사이즈가 정확하지 않을 수 있다. 해당 함수는 뷰는 로드됐다고 확인할 수 있지만, 배치가 됐다고 할수는 없다. 따라서 위와 같은 현상은 viewDidLoad에서 임의로 잡혔던 frame값이 `viewWillLayoutSubviews`가 호출하면서 하위 뷰가 배치되고 이후 값이 변했다고 볼 수 있겠다. 따라서 하위뷰가 배치가 되고나서 버튼의 레이아웃을 잡아줘야 해결이 가능했던 것이다.
+
+### 여기서 의문점이 드는 것은 다른 디바이스들은 상관없는데 왜 SE에서만 버튼의 크기가 줄어드는 것일까?
+
+- 3기 캠퍼 `수박` 의 도움으로 해당 의문점을 풀 수 있었다.
+
+![https://i.imgur.com/MiyseWl.png](https://i.imgur.com/MiyseWl.png)
+
+- HIG에서 장치들의 치수를 확인해서 세로를 보면 200~300정도 차이가 나는 것을 확인할 수 있다.
+사진에서도 볼 수 있듯이 세로 크기가 엄청 차이난다.
+따라서 작아진 디바이스에 오토 레이아웃을 충족하기 위해 버튼의 크기를 줄일 수 밖에 없다는 추측이 가능해졌다.
+- 이러한 사실을 증명해낼 수도 있다. 직접 레이아웃을 다 계산하여 치수와 맞는지 확인할 수도 있지만... 나중에 시도해봐야겠다. 😇
+
+</br>
+
+## 🔥 새롭게 알게된 것
+
+### "Array에 제네릭 타입이 Element가 기재되어있는 경우"
+- `상황` 자료구조를 공부하다가 제네릭을 사용한 예제 코드들을 살펴보니 `<T>`로 작성되어있는 경우가 있고, `<Element>`를 사용한 경우가 있는데 둘의 차이가 궁금해졌다. 
+    
+![](https://i.imgur.com/POuRbFM.png)
+    
+- `이유` 공식문서 Generic 부분에서 `Naming Type Parameters` 부분을 살펴보니 이름이 없는 것과 이름이 있는 Element는 차이가 없지만 파라미터와 타입 사이의 관계를 가지고 있을때 명확함을 주기 위해 사용한다고 한다. 그러나 관계가 없는 상황에서는 `T`, `U`, `V` 를 주로 사용한다고 한다. 
+- `해결` Array와 마찬가지로 Queue나 LinkedList도 요소들이 서로 관계가 있다고 생각하여, 타입 내부에 제네릭 타입`<T>`을 Element라고 명시해주었다. 
+
+### "removeAll vs 빈 배열 할당하기"
+
+- `상황` 리뷰어 엘림에게 removeAll과 빈배열을 할당하는 것이 어떤 차이가 있냐고 질문을 받았는데 어떤 차이가 있는지 모르겠다.
+- `이유` Swift github를 통해 removeAll 동작 방식을 한번 살펴보게 되었다.
+
+![image](https://user-images.githubusercontent.com/75905803/141038635-c62fdf49-0118-4eaa-a035-9386a55d165c.png)
+
+![image](https://user-images.githubusercontent.com/75905803/141038660-bc3d1d3f-388d-445d-bca2-1561e2aa3333.png)
+
+- `해결` 살펴보니 파라미터 기본값을 따로 ture로 설정해주지 않는다면 빈 Array를 초기화해주는 동작을 하고 있었다. 따라서 빈 배열과 removeAll는 큰차이가 없는 것으로 결론이 났다.
+
+### "빈 프로토콜의 존재 의미"
+
+* `상황` STEP 1을 진행할 때 빈 프로토콜을 구현해두라는 부분에서 잘 이해가 가지 않았다.
+* `이유` 알고보니 CalculateItem은 `Queue에서 다루는 요소`가 준수해야했던 프로토콜이였다.
+* `해결` STEP 2를 진행하게 되면서 해당 프로토콜의 역할을 잘 이해할 수 있었고, 덕분에 빈 프로토콜의 용도에 대해서 알게되었다.
+
+### "split vs components"
+
+- `상황` 엘림에게 질문을 받았는데 내가 알고있던 차이점은 반환타입 뿐이였다.
+- `이유` 반환타입 말고도 다른 차이점도 있었던게 생각나서 정리해보았다.
+- `해결`
+- `import 여부`
+    - split은 swift 표준 라이브러리에 속해있다.
+    - components는 Foundation 프레임워크에 속해있어 import하여 사용할 수 있다.
+- `파라미터`
+    - split(separator: Character, maxSplits: Int = Int.max, omittingEmptySubsequences: Bool = true)
+    - components(separatedBy separator: String)
+- `공백으로 처리할 때의 다른 결과`
+    ```swift
+    let str = "My name is Sudhir " // trailing space
+    
+        str.split(separator: " ")
+        // ["My", "name", "is", "Sudhir"]
+    
+        str.components(separatedBy: " ")
+        // ["My", "name", "is", "Sudhir", ""] ← Additional empty string
+    ```
+    둘다 동일한 결과가 나오게 하려면 split의 파라미터 `omittingEmptySubsequences`를 false로 옵션을 따로 줘야 가능하다.
+    ```swift
+    str.split(separator: " ", omittingEmptySubsequences: false)
+        // ["My", "name", "is", "Sudhir", ""]
+    ```
+- `반환타입의 차이`
+    - split -> [Substring]
+    - components -> [String]
+- `성능 차이` 
+    반환타입에서 볼 수 있듯 `split`은 원본 문자열을 참조(SubString)하고 있기 때문에, 새 문자열을 할당하지 않는다.따라서 split이 components보다 성능측면에서 빠르다고 볼 수 있다.
+    
+    > Substring이란?원본 문자열의 메모리를 공유한다.값을 읽기만 할 때는 원본메모리를 공유하고, 값을 변경하는 시점에만 새로운 메모리가 생성된다.
+    
+    Substring은 주로 문자열을 처리할 때 메모리를 절약하기 위해서 쓰이는 타입으로 알고있다!
+
+### "`viewWillLayoutSubviews()`는 무슨 역할을 할까?"
+
+- 뷰의 바운드가 최종적으로 결정되는 최초 시점
+- 제약이나 오토레이아웃을 사용하지 않았다면, 서브뷰의 레이아웃을 업데이트하기 적합한 시점이다.
+- 여러번 중복으로 호출될 수 있다.
+    - ex) 메인뷰의 서브뷰가 로드되는 경우
+- 메소드를 알아보고 엘림의 피드백을 받고 다시 디버깅을 해보니 `버튼이 클릭이 되는 시점`마다 해당 메소드가 호출이 되고있었다.  cornerRadius를 잡아주는 for문이 버튼이 누를때마다 실행되고 있었던 것이다. 즉 SubView의 레이아웃을 잡아주기에는 적절치 못한 메소드였다.
+
+</br>
+
+[![top](https://img.shields.io/badge/top-%23000000.svg?&amp;style=for-the-badge&amp;logo=Acclaim&amp;logoColor=white&amp;)](#-계산기-프로젝트)
+
+<details>
+<summary>[학습 기록 흔적]</summary>
+<div markdown="1">
+
+# 목차
+- [STEP 1 : Queue **타입 구현**](#step-1--queue-타입-구현)
+    + [고민했던 것](#1-1-고민했던-것)
+    + [의문점](#1-2-의문점)
+    + [Trouble Shooting](#1-3-trouble-shooting)
+    + [배운 개념](#1-4-배운-개념)
+    + [PR 후 개선사항](#1-5-pr-후-개선사항)
+- [STEP 2 : 계산 타입 및 주변 타입 구현](#step-2--계산-타입-및-주변-타입-구현)
+    + [고민했던 것](#2-1-고민했던-것)
+    + [의문점](#2-2-의문점)
+    + [Trouble Shooting](#2-3-trouble-shooting)
+    + [배운 개념](#2-4-배운-개념)
+    + [PR 후 개선사항](#2-5-pr-후-개선사항)
+- [STEP 3 : 계산기 UI 연동](#step-3--계산기-ui-연동)
+    + [고민했던 것](#3-1-고민했던-것)
+    + [의문점](#3-2-의문점)
+    + [Trouble Shooting](#3-3-trouble-shooting)
+    + [배운 개념](#3-4-배운-개념)
+    + [PR 후 개선사항](#3-5-pr-후-개선사항)
 
 # STEP 1 : **Queue 타입 구현**
 - 자료구조 Queue 타입을 구현합니다.
@@ -66,7 +370,7 @@
 
 ![](https://i.imgur.com/pwLcl0n.jpg)
 
-[![top](https://img.shields.io/badge/top-%23000000.svg?&amp;style=for-the-badge&amp;logo=Acclaim&amp;logoColor=white&amp;)](#계산기-프로젝트)
+[![top](https://img.shields.io/badge/top-%23000000.svg?&amp;style=for-the-badge&amp;logo=Acclaim&amp;logoColor=white&amp;)](#목차-1)
 
 ## 1-1 고민했던 것
 - Queue를 DoubleStack과 LinkedList를 이용하여 두가지를 구현해보았다. 배열로도 구현할 수 있지만 enqueue 작업이 시간복잡도가 O(1)이 걸려서 비효율적이다. 
@@ -110,7 +414,7 @@
 - 짧은 return문이라도 줄바꿈 해주는 것이 디버깅 시 유용하다.
 - 메서드 탈출하는 부분은 보통 if보다는 guard를 주로 사용하는 것이 적절한 것 같다.
 
-[![top](https://img.shields.io/badge/top-%23000000.svg?&amp;style=for-the-badge&amp;logo=Acclaim&amp;logoColor=white&amp;)](#계산기-프로젝트)
+[![top](https://img.shields.io/badge/top-%23000000.svg?&amp;style=for-the-badge&amp;logo=Acclaim&amp;logoColor=white&amp;)](#목차-1)
 
 # STEP 2 : 계산 타입 및 주변 타입 구현
 
@@ -259,7 +563,7 @@
 - split과 components의 차이점을 알 수 있었다.
 - 메소드명에 get은 언제 사용할 수 있는지 알게 되었다.
 
-[![top](https://img.shields.io/badge/top-%23000000.svg?&amp;style=for-the-badge&amp;logo=Acclaim&amp;logoColor=white&amp;)](#계산기-프로젝트)
+[![top](https://img.shields.io/badge/top-%23000000.svg?&amp;style=for-the-badge&amp;logo=Acclaim&amp;logoColor=white&amp;)](#목차-1)
 
 # STEP 3 : **계산기 UI 연동**
 
@@ -515,4 +819,8 @@ IBOutlet의 didSet은 `viewDidLoad가 호출되기 전`에 호출되므로 적�
 - LocalizedError 프로토콜을 활용하여 description을 좀 더 직관적으로 확인할 수 있게 개선
 - 커스텀 뷰를 만들어서 ViewController 내부 코드 개선
 
-[![top](https://img.shields.io/badge/top-%23000000.svg?&amp;style=for-the-badge&amp;logo=Acclaim&amp;logoColor=white&amp;)](#계산기-프로젝트)
+[![top](https://img.shields.io/badge/top-%23000000.svg?&amp;style=for-the-badge&amp;logo=Acclaim&amp;logoColor=white&amp;)](#목차-1)
+
+
+</div>
+</details>
