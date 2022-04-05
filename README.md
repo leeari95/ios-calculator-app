@@ -21,6 +21,7 @@
     + ["빈 프로토콜의 존재 의미"](#빈-프로토콜의-존재-의미)
     + ["split vs components"](#split-vs-components)
     + ["`viewWillLayoutSubviews()`는 무슨 역할을 할까?"](#viewwilllayoutsubviews는-무슨-역할을-할까)
+- [기술적 도전](#-기술적-도전)
 
 </br>
 
@@ -336,6 +337,13 @@ IBOutlet의 didSet은 `viewDidLoad가 호출되기 전`에 호출되므로 적�
 - 메소드를 알아보고 엘림의 피드백을 받고 다시 디버깅을 해보니 `버튼이 클릭이 되는 시점`마다 해당 메소드가 호출이 되고있었다.  cornerRadius를 잡아주는 for문이 버튼이 누를때마다 실행되고 있었던 것이다. 즉 SubView의 레이아웃을 잡아주기에는 적절치 못한 메소드였다.
 
 </br>
+
+## 💪🏻 기술적 도전
+
+### Delegate Pattern
+
+* MVC 구조로 인해 뚱뚱해진 ViewController를 다이어트 시켜주기 위해 Delegate 패턴을 사용하게 되었습니다.
+* 비즈니스 로직 부분을 별도의 타입으로 만들어 책임을 나누어주어 ViewController의 코드 가독성이 높아지고, 역할 또한 명확히 나누어졌습니다.
 
 [![top](https://img.shields.io/badge/top-%23000000.svg?&amp;style=for-the-badge&amp;logo=Acclaim&amp;logoColor=white&amp;)](#-계산기-프로젝트)
 
